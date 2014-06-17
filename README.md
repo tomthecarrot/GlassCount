@@ -2,11 +2,9 @@ GlassCount
 =========
 
 GlassCount is an app for Google Glass that allows you to count how many Glass Explorers you see at Google IO.  
-Then you can go to the GlassCount website and compare your results with others!
+Then you can go to the GlassCount website and see average/total Explorer counts from other people.
 
 Website: http://tomthecarrot.com/glasscount
-
-**THIS IS STILL A WORK-IN-PROGRESS (WIP)** -- It does not completely work yet, but stay tuned for updates!
 
 Tutorial:  
 1. Plug Glass into your computer via USB.  
@@ -16,5 +14,7 @@ Tutorial:
 
 To uninstall:  
 Open a terminal console or command line and type: ```adb uninstall com.carrotcorp.glasscount```
+
+When working with the website source code, make sure you rename ```htaccess``` to ```.htaccess``` after it is uploaded to your web server.
 
 Licensed under the CarrotCorp Open Source License v1.0. See LICENSE file for more information.
