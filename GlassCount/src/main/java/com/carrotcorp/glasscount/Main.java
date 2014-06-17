@@ -2,6 +2,7 @@ package com.carrotcorp.glasscount;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -22,12 +23,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-// TODO: implement offline mode
-
 public class Main extends Activity {
     private String domain; // domain name and path to the PHP server
     private int offlineCount = 0; // how many counts have been created while offline?
     private String deviceID; // unique ID of this Glass device to differentiate between users on the website
+    private SharedPreferences prefs; // read/write offlineCounts integer to internal preferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +41,24 @@ public class Main extends Activity {
 
         // Get device unique identifier (UUID)
         deviceID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        // Instantiate prefs object
+        prefs = getSharedPreferences("GlassCount", Context.MODE_PRIVATE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        // Calculate offline count
+        // Read offlineCount from internal preferences
+        offlineCount = prefs.getInt("offlineCount", 0);
+
+        Log.i("GlassCount", "read: " + offlineCount);
+
+        // Calculate new offline count
         offlineCount++;
+
+        Log.i("GlassCount", "newcalc: " + offlineCount);
 
         // Check for connection
         if (isNetworkAvailable()) {
@@ -58,10 +68,32 @@ public class Main extends Activity {
                     // Send counts to the server
                     boolean success = sendServer(offlineCount, deviceID);
                     if (success) {
+                        // Reset offlineCount back to zero
+                        // if successfully synced with server
                         offlineCount = 0;
+
+                        Log.i("GlassCount", "connection successful");
                     }
+                    else {
+                        Log.i("GlassCount", "connection failed");
+                    }
+
+                    // Update the offlineCount value
+                    prefs.edit().putInt("offlineCount", offlineCount).commit();
+
+                    // Finish this activity
+                    finish();
                 }
             }.start();
+        }
+        else {
+            // Update the offlineCount value
+            prefs.edit().putInt("offlineCount", offlineCount).commit();
+
+            Log.i("GlassCount", "newset: " + offlineCount);
+
+            // Finish this activity
+            finish();
         }
     }
 
