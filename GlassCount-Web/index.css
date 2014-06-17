@@ -1,0 +1,35 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+	background: -webkit-linear-gradient(white, lightgrey); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(white, lightgrey); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(white, lightgrey); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(white, lightgrey); /* Standard syntax */
+}
+
+h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:700;
+	font-size:58px;
+	text-align:center;
+}
+
+h2 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:700;
+	font-size:30px;
+	text-align:center;
+	line-height:0%;
+}
+
+h3 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	text-align:center;
+}
+
+p {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	text-align:center;
+}
