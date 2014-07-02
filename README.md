@@ -17,4 +17,4 @@ Open a terminal console or command line and type: ```adb uninstall com.carrotcor
 
 When working with the website source code, make sure you rename ```htaccess``` to ```.htaccess``` after it is uploaded to your web server.
 
-Licensed under the CarrotCorp Open Source License v1.0. See LICENSE file for more information.
+Licensed under the CarrotCorp Open Source License v1.0.1. See LICENSE file for more information.
